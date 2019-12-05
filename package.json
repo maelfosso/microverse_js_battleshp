@@ -1,0 +1,16 @@
+{
+  "name": "Battleship",
+  "version": "1.0.0",
+  "description": "This is a library application in javascript with add book, remove book and change read status functionality",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
+  }
+}
