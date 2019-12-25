@@ -1,18 +1,23 @@
 const Ship = (length) => {
-  length,
-  hits = new Array(length).fill(false),
-
+  const hits = new Array(length).fill(false),
+  
   hit = (index) => {
-    if (index < 0 && index > length) {
-      throw new Error('error ...');
+    if (index < 0 || index >= length) {
+      throw new Error('error. index is out of range...');
     }
-    this.hits[index] = true;
+    hits[index] = true;
   },
-
   isSunk = () => {
-    return this.hits.every(true);
+    return hits.every(h => h == true);
   }
 
+  return {
+    length,
+    hits,
+
+    hit,
+    isSunk
+  }
 };
 
 export default Ship;
