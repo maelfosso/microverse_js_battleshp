@@ -1,0 +1,57 @@
+- grid 10x10 for saving the position of our ship and records opponent ships
+- grid 10x10 for recording the shots  the result of our shot
+
+ship has a position start at x1, y1 and end at x2, y2. consecutive set of position
+- start
+- end
+- length - number of squares <= (type of ship)
+- horizontally | vertically
+
+there are many type of ships
+- Carrier: 5
+- Battleship: 4
+- Cruiser: 3
+- Submarine: 3
+- Destroyer: 2
+
+There is number of ship allowed
+
+GAME STEP
+1. Put the ships on the grid
+2. While game_on
+    a. Target a square on the opponent's grid
+    b. The opponent announce whether or not there was a ship at that square
+        * Yes: there was a ship there => it's a hit. 
+            - mark on the player grid (ocean grid) the hit
+            - mark also the hit on tracking grid
+        * No
+        
+    if all the squares of a ship have been hit, the owner announce the sinking of that ship
+    
+    if there is no ship anymore on the board, the game is over and the player is declared
+    
+    
+ShipType
+- name
+- length
+
+Ship
+- type
+- length <= ship type
+- position start
+- position end
+- orientation (horizontal |  vertical) 
+- isSunk()
+- hit(position)
+
+GameBoard
+- array of ships
+- array of grid (mark them with X for cells occupied by us, Y cells hitted)
+- place a ship (at a position)
+- state (all the ships have already been sunk)
+    * Loop over all ship and call isSunk() from ship
+- playAt(position)
+    * Check whether or not there is a ship at that position
+        - If so, call hit(position) from that ship
+        
+        
