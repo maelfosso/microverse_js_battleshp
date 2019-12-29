@@ -1,5 +1,5 @@
 import GameInterface from './GameInterface';
-import { Fragment } from './utils';
+import { el, Fragment } from './utils';
 
 const App = () => {
 
@@ -7,7 +7,7 @@ const App = () => {
     <Fragment>
       <header>
         <nav>
-          <div>Battleship</div>
+          <h1 className="logo">Battleship</h1>
         </nav>
       </header>
       <div>

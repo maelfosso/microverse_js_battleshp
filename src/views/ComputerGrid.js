@@ -1,3 +1,4 @@
+import { el } from './utils';
 
 const ComputerGrid = ({}) => {
   const cells = new Array(10)
@@ -8,7 +9,7 @@ const ComputerGrid = ({}) => {
     });
 
   return (
-    <div>{ cells.flat() }</div>
+    <div className="cells">{ cells.flat() }</div>
   );
 }
 

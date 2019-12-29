@@ -1,5 +1,6 @@
 import PlayerGrid from './PlayerGrid';
 import ComputerGrid from './ComputerGrid';
+import { el } from './utils';
 
 const GameInterface = ({}) => {
 
@@ -7,9 +8,11 @@ const GameInterface = ({}) => {
     <div className="game">
       <div className="grids">
         <div className="player">
+          <h3>Player</h3>
           <PlayerGrid />
         </div>
         <div className="computer">
+          <h3>Computer</h3>
           <ComputerGrid />
         </div>
       </div>
