@@ -1,7 +1,7 @@
 import GameInterface from './GameInterface';
 import { el, Fragment } from './utils';
 
-const App = () => {
+const App = ({ game, context }) => {
 
   return (
     <Fragment>
@@ -11,7 +11,7 @@ const App = () => {
         </nav>
       </header>
       <div>
-        <GameInterface />
+        <GameInterface game={game} />
       </div>
       <footer>
         <div>Mael FOSSO</div>

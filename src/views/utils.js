@@ -66,21 +66,32 @@ export const mount = (node, host) => {
   else host.appendChild(coerce(node));
 }
 
-// export const Fragment = props => {
-//   const parent = document.createDocumentFragment();
-//   props.children.forEach(child => {
-//     if (Array.isArray(child)) {
-//       child.forEach(node => parent.appendChild(node));
-//     } else {
-//       parent.appendChild(child);
-//     }
-//   });
-//   return parent;
-// };
+export const random = max => Math.floor(Math.random() * max);
 
-// export const mount = (node, host) => {
-//   while (host.firstChild) host.removeChild(host.firstChild);
+export class Observable {
+  constructor() {
+    this.handlers = {};
+    this.build();
+  }
 
-//   if (Array.isArray(node)) node.forEach(child => host.appendChild(child));
-//   else host.appendChild(coerce(node));
-// };
+  on(action, handler) {
+    if (this.handlers[action]) this.handlers[action].push(handler);
+    else this.handlers[action] = [handler];
+  }
+
+  build() {
+    const prototype = Object.getPrototypeOf(this);
+    Object.getOwnPropertyNames(prototype).forEach(prop => {
+      if (prop !== 'constructor' && typeof prototype[prop] === 'function') {
+        Object.defineProperty(this, prop, {
+          value: (...args) => {
+            const val = prototype[prop].call(this, ...args);
+            if (this.handlers[prop])
+              this.handlers[prop].forEach(handler => handler(val));
+            return val;
+          },
+        });
+      }
+    });
+  }
+}

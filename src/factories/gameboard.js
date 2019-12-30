@@ -1,3 +1,6 @@
+import Ship from './ship';
+import { random } from "../views/utils";
+
 const Gameboard = () => {
   const board = new Array(100).fill(undefined);
   const ships = [];
@@ -90,6 +93,34 @@ const Gameboard = () => {
     }
   }
 
+  const init = () => {
+    let shipTypeNumber = {
+      '4': 1,
+      '3': 2,
+      '2': 3,
+      '1': 4
+    }
+
+    Object.keys(shipTypeNumber).forEach(type => {
+      
+      let ship = Ship(+type);
+
+      let i=0;
+      while (i < shipTypeNumber[type]) {
+        
+        let x = random(10);
+        let y = random(10);
+        let orientation = random(10) % 2 == 0 ? "horizontal" : "vertical";
+
+        let isPlaced = placeShipAt(ship, x, y, orientation);
+
+        if (isPlaced) {
+          i++;
+        }
+      }
+    });
+  }
+
   return {
     board,
     ships,
@@ -97,6 +128,8 @@ const Gameboard = () => {
     placeShipAt,
     receiveAttack,
     state,
+
+    init
   }
 };
 

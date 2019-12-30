@@ -2,18 +2,18 @@ import PlayerGrid from './PlayerGrid';
 import ComputerGrid from './ComputerGrid';
 import { el } from './utils';
 
-const GameInterface = ({}) => {
+const GameInterface = ({ game, context }) => {
 
   return (
     <div className="game">
       <div className="grids">
         <div className="player">
           <h3>Player</h3>
-          <PlayerGrid />
+          <PlayerGrid gameboard={game.player.gameboard} />
         </div>
         <div className="computer">
           <h3>Computer</h3>
-          <ComputerGrid />
+          <ComputerGrid gameboard={game.computer.gameboard} />
         </div>
       </div>
       <div className="actions">

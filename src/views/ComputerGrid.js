@@ -1,6 +1,6 @@
 import { el } from './utils';
 
-const ComputerGrid = ({}) => {
+const ComputerGrid = ({ gameboard, context }) => {
   const cells = new Array(10)
     .fill(undefined)
     .map((a) => {
