@@ -7,7 +7,7 @@ export default class Game {
     this.computer = Player();
     this.player = Player();
 
-    this.computer.gameboard.init()
+    // this.computer.gameboard.init()
     this.player.gameboard.init()
   }
 

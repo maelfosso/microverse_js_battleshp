@@ -40,6 +40,14 @@
         padding: 0;
         height: 2em;
         width: 2em;
+
+        &.ship {
+          background-color: #00f;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+        }
       }
     }
   }

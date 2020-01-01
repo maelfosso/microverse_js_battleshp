@@ -10,4 +10,4 @@ const Ship = ({ ship, context }) => {
   )
 }
 
-export default Cell;
+export default Ship;

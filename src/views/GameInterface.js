@@ -13,7 +13,7 @@ const GameInterface = ({ game, context }) => {
         </div>
         <div className="computer">
           <h3>Computer</h3>
-          <ComputerGrid gameboard={game.computer.gameboard} />
+          {/* <ComputerGrid gameboard={game.computer.gameboard} /> */}
         </div>
       </div>
       <div className="actions">

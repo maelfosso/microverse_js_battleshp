@@ -12,15 +12,24 @@ const Gameboard = () => {
     if (orientation == 'horizontal') {
       let values = [];
       for (let i=0; i<shipLength; i++) {
-        values.push(board[10 * x + y + i]);
+        values.push(board[10 * y + x + i]);
       }
+      
+      if (x - 1 >= 0 && board[10 * y + x - 1] !== undefined) return false;
+      if (x + shipLength - 1 < board.length && board[10 * y + x + shipLength - 1] !== undefined) return false;
 
-      if ((x + ship.length - 1 < 10) && (values.every(v => v === undefined)))  {
+
+      if ((x + shipLength - 1 < 10) && (values.every(v => v === undefined)))  {
         for (let i=0; i<shipLength; i++) {
-          board[10 * x + y + i] = ships.length;
+          if (board[10 * (y + 1) + x + i] !== undefined) return false;
+          if (board[10 * (y - 1) + x + i] !== undefined) return false;
         }
 
-        // ships.push(Ship(shipLength, [x,y], [x+shipLength, y], orientation));
+        for (let i=0; i<shipLength; i++) {
+
+          board[10 * y + x + i] = shipLength; // ships.length;
+        }
+
         ships.push({
           'ship': ship,
           "start": [x,y],
@@ -34,15 +43,23 @@ const Gameboard = () => {
     } else if (orientation == 'vertical') {
       let values = [];
       for (let i=0; i<shipLength; i++) {
-        values.push(board[10 * (x + i) + y]);
+        values.push(board[10 * (y + i) + x]);
       }
+      
+      if (10 * (y - 1) + x >= 0 && board[10 * (y - 1) + x] !== undefined) return false;
+      if (10 * (y + shipLength - 1) + x < board.length && board[10 * (y + shipLength - 1) + x] !== undefined) return false;
 
+      
       if ((y + shipLength - 1 < 10) && (values.every(v => v === undefined))) {
         for (let i=0; i<shipLength; i++) {
-          board[10 * (x + i) + y] = ships.length;
+          if (board[10 * (y + i) + x - 1] !== undefined) return false;
+          if (board[10 * (y + i) + x + 1] !== undefined) return false;
         }
 
-        // ships.push(Ship(shipLength, [x,y], [x, y+shipLength], orientation));
+        for (let i=0; i<shipLength; i++) {
+          board[10 * (y + i) + x] = shipLength; 
+        }
+
         ships.push({
           'ship': ship,
           "start": [x,y],
@@ -104,19 +121,23 @@ const Gameboard = () => {
     Object.keys(shipTypeNumber).forEach(type => {
       
       let ship = Ship(+type);
+      console.log(ship);
 
       let i=0;
-      while (i < shipTypeNumber[type]) {
+      let step = 0;
+      while (i < shipTypeNumber[type] && step < 50) {
         
         let x = random(10);
         let y = random(10);
         let orientation = random(10) % 2 == 0 ? "horizontal" : "vertical";
 
         let isPlaced = placeShipAt(ship, x, y, orientation);
-
+        console.log(i, isPlaced, x, y);
         if (isPlaced) {
           i++;
+          console.log(board);
         }
+        step++;
       }
     });
   }
