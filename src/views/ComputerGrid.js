@@ -1,15 +1,29 @@
 import { el } from './utils';
+import Cell from './Cell';
 
-const ComputerGrid = ({ gameboard, context }) => {
-  const cells = new Array(10)
+const ComputerGrid = ({ game, context }) => {
+
+  const handleClick = coord => e => {
+    const cell = e.target;
+    let res = game.playerAttack(coord);
+    if (res === false) {
+      cell.classList.add('missed');
+      game.computerAttack();
+    } else {
+      cell.classList.add('hit');
+    }
+  };
+
+  const cells = new Array(100)
     .fill(undefined)
-    .map((a) => {
-      return new Array(10).fill(undefined)
-        .map((c) => <div className="cell"></div>)
-    });
+    .map((a, ix) => <Cell index={ix} click={handleClick(ix)}/>);
 
   return (
-    <div className="cells">{ cells.flat() }</div>
+    <div 
+      className="board"
+    >
+      { cells.flat() }
+    </div>
   );
 }
 

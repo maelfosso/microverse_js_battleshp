@@ -18,6 +18,11 @@
       display: flex;
       flex-wrap: wrap;
       
+      &.disable {
+        pointer-events: none;
+        cursor: none;
+      }
+
       .ship {
         border: 2px solid #00f;
         background: rgba(0,0,255,.05);
@@ -40,6 +45,7 @@
         padding: 0;
         height: 2em;
         width: 2em;
+        cursor: pointer;
 
         &.ship {
           background-color: #00f;
@@ -47,6 +53,14 @@
           align-items: center;
           justify-content: center;
           color: white;
+        }
+
+        &.hit {
+          background-color: red;
+        }
+
+        &.missed {
+          background-color: yellow;
         }
       }
     }

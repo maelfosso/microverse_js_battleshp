@@ -1,28 +1,12 @@
 import { el } from './utils';
 
-const Cell = ({ ship, type, context }) => {
-  
-  // new Array(10)
-  //   .fill(undefined)
-  //   .map((a) => {
-  //     return new Array(10).fill(undefined)
-  //       .map((c) => <div className="cell"></div>)
-  //   });
+const Cell = ({ ship, type, index, click, context }) => {
 
-  return ship ? (<div class="cell ship">{type}</div>) : (<div class="cell"></div>);
-  // if (!ship) {
-  //   return (
-  //     <div class="cell"></div>
-  //   );
-  // } else {
-  //   return (
-  //     <div class="cell ship"></div>
-  //   );
-  // }
-
-  // return (
-  //   <div class="cell"></div>
-  // );
+  return ship ? (
+    <div class="cell ship" data-index={index}>{type}</div>
+  ) : (
+    <div class="cell" data-index={index} onClick={click}></div>
+  );
 }
 
 export default Cell;

@@ -2,56 +2,38 @@ import Cell from './Cell';
 import Ship from './Ship';
 import { el } from './utils';
 
-const PlayerGrid = ({ gameboard, context }) => {
+const PlayerGrid = ({ game, context }) => {
   let cells = [];
   let raw = [];
-  cells = gameboard.board.map((c) => {
+  let disable = false;
+
+  cells = game.player.gameboard.board.map((c, ix) => {
     let ship = c === undefined ? false : true;
 
-    return <Cell ship={ship} type={c}/>
+    return <Cell index={ix} ship={ship} type={c}/>
   });
 
-  // new Array(10)
-  //   .fill(undefined)=
-  //   .map((a) => {
-  //     return new Array(10).fill(undefined)
-  //       .map((c) => <div className="cell"></div>)
-  //   });
+  game.on('togglePlayerAttacks', (result) => {
+    console.log('togglePlayerAttack ', result);
+    disable = result;
+  });
 
-  // let board = gameboard.board;
-  // let ships = gameboard.ships;
+  game.on('computerAttack', result => {
+    console.log("PlayerGrid - ComputerAttack ", result);
+    let [index, r] = result;
+    console.log(cells[index]);
+    if (r === true) {
+      cells[index].classList.add('hit');
 
-  // console.log("IN PLAYER GRID");
-  // console.log(board);
-  // let i=0;
-  // while (i < board.length) {
-  //   if (board[i] === undefined) {
-  //     cells.push(<Cell />);
-  //     raw.push(<Cell />);
-
-  //     i++;
-  //   } else {
-  //     let j=i;
-  //     let ship = [];
-  //     while (j < board.length && board[j] !== undefined) {
-  //       ship.push(board[j]);
-  //       j++;
-
-  //       raw.push(<Cell />);
-  //     }
-
-  //     cells.push(<Ship ship={ship} />);
-  //     i = i + j - 1;
-  //     console.log(i, ship.length, <Ship ship={ship} />);
-  //     // i++;
-  //   }
-  // }
-
-  // console.log(cells);
-  // console.log(raw);
+      // Computer play again
+      game.computerAttack();
+    } else {
+      cells[index].classList.add('missed');
+    }
+  });
   
   return (
-    <div className="board">{ cells }</div>
+    <div className={`board ${disable ? 'disable': ''}`}>{ cells }</div>
   );
 }
 

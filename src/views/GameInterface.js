@@ -9,11 +9,11 @@ const GameInterface = ({ game, context }) => {
       <div className="grids">
         <div className="player">
           <h3>Player</h3>
-          <PlayerGrid gameboard={game.player.gameboard} />
+          <PlayerGrid game={game} />
         </div>
         <div className="computer">
           <h3>Computer</h3>
-          {/* <ComputerGrid gameboard={game.computer.gameboard} /> */}
+          <ComputerGrid game={game} />
         </div>
       </div>
       <div className="actions">

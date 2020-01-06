@@ -27,13 +27,13 @@ const Gameboard = () => {
 
         for (let i=0; i<shipLength; i++) {
 
-          board[10 * y + x + i] = shipLength; // ships.length;
+          board[10 * y + x + i] = ships.length;
         }
 
         ships.push({
           'ship': ship,
           "start": [x,y],
-          'end': [x+shipLength, y],
+          'end': [x + shipLength - 1, y],
           'orientation': orientation
         })
         return true;
@@ -57,13 +57,13 @@ const Gameboard = () => {
         }
 
         for (let i=0; i<shipLength; i++) {
-          board[10 * (y + i) + x] = shipLength; 
+          board[10 * (y + i) + x] = ships.length; // shipLength; 
         }
 
         ships.push({
           'ship': ship,
           "start": [x,y],
-          'end': [x, y+shipLength],
+          'end': [x, y + shipLength - 1],
           'orientation': orientation
         });
         return true;
@@ -74,29 +74,30 @@ const Gameboard = () => {
   }
 
   const receiveAttack = (x, y) => {
-    let ix = board[10 * x + y];
-    
+    let ix = board[10 * y + x];
+    console.log("receiveAttack", x, y, ix);
     if (ix === undefined) {
-      board[10 * x + y] = -1;
+      board[10 * y + x] = -1;
       
       return false;
     } else { 
       
-      if (isNaN(ix)) {
+      if (isNaN(ix) || ix == -1) {
         return false; // Already attacked
       }
 
+      console.log(ships[ix]);
       let {ship, start, end, orientation} = ships[ix]; // .onBaord();
       let hix = -1;
 
-      if (o == 'horizontal') {
+      if (orientation === "horizontal") {
         hix = x - start[0];
-      } else  if (o == 'horizontal') {
+      } else  if (orientation === "vertical") {
         hix = y - start[1];
       }
-      
+      console.log('hix', hix);
       ships[ix].ship.hit(hix); 
-      board[10 * x + y] = 'X';
+      board[10 * y + x] = 'X';
       // ship.hit(hix); 
       return true;
     }
@@ -121,7 +122,6 @@ const Gameboard = () => {
     Object.keys(shipTypeNumber).forEach(type => {
       
       let ship = Ship(+type);
-      console.log(ship);
 
       let i=0;
       let step = 0;
@@ -132,14 +132,14 @@ const Gameboard = () => {
         let orientation = random(10) % 2 == 0 ? "horizontal" : "vertical";
 
         let isPlaced = placeShipAt(ship, x, y, orientation);
-        console.log(i, isPlaced, x, y);
         if (isPlaced) {
           i++;
-          console.log(board);
         }
         step++;
       }
     });
+
+    console.log(ships);
   }
 
   return {
