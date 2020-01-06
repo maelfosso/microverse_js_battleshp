@@ -6,12 +6,18 @@ const GameInterface = ({ game, context }) => {
 
   game.on('state', ({state, player}) => {
     if (state == true) {
-      let node = document.getElementById('message').innerHTML = `${player} WON!!`
+      let node = document.getElementById('message').innerHTML = `${player == 'computer' ? 'Player' : 'Computer'} WON!!`
 
       let {message: host} = context;
       mount(node, host);
     }
+  });
+
+  game.on('init', () => {
+    let node = document.getElementById('message').innerHTML = "";
     
+    let {message: host} = context;
+    mount(node, host);
   });
 
   return (
