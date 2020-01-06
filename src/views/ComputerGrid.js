@@ -1,7 +1,32 @@
-import { el } from './utils';
+import { el, mount, Fragment } from './utils';
 import Cell from './Cell';
 
 const ComputerGrid = ({ game, context }) => {
+
+  let disable = false;
+
+
+  game.on('togglePlayerAttacks', (result) => {
+    console.log('togglePlayerAttack ', result);
+    disable = result;
+  });
+
+  game.on('init', () => {
+    console.log('ComputerGrid - on init');
+
+    const cells = new Array(100)
+      .fill(undefined)
+      .map((a, ix) => <Cell index={ix} click={handleClick(ix)}/>);
+
+
+    const { computer: host } = context;
+    mount(
+      <Fragment>
+        { cells }
+      </Fragment>,
+      host
+    );
+  });
 
   const handleClick = coord => e => {
     const cell = e.target;
@@ -20,7 +45,8 @@ const ComputerGrid = ({ game, context }) => {
 
   return (
     <div 
-      className="board"
+      className={`board ${disable ? 'disable': ''}`}
+      ref="computer" context={context}
     >
       { cells.flat() }
     </div>

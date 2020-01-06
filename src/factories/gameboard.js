@@ -112,6 +112,11 @@ const Gameboard = () => {
   }
 
   const init = () => {
+    for (let i=0; i<board.length; i++) {
+      board[i] = undefined;
+    }
+    while (ships.length > 0) ships.pop();
+
     let shipTypeNumber = {
       '4': 1,
       '3': 2,

@@ -4,8 +4,6 @@ import { random, Observable } from "../views/utils";
 
 export default class Game extends Observable {
 
-  // attacksByComputer = [];
-
   constructor() {
     super(); 
 
@@ -23,6 +21,9 @@ export default class Game extends Observable {
   init() {
     this.computer.gameboard.init();
     this.player.gameboard.init();
+
+    console.log("INit called");
+    return true;
   }
 
   togglePlayerAttack() {

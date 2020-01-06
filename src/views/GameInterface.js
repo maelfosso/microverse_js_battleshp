@@ -4,6 +4,10 @@ import { el } from './utils';
 
 const GameInterface = ({ game, context }) => {
 
+  game.on('init', () => {
+    console.log('GameInterface - on init');
+  });
+
   return (
     <div className="game">
       <div className="grids">
@@ -17,9 +21,9 @@ const GameInterface = ({ game, context }) => {
         </div>
       </div>
       <div className="actions">
-        <button id="redistribute">Redistribute</button>
-        <button id="reset">Reset</button>
-        <button id="start">Start</button>
+        <button id="redistribute" onClick={e => game.init()}>Redistribute</button>
+        <button id="reset" onClick={e => game.init()}>Reset</button>
+        {/* <button id="start">Start</button> */}
       </div>
     </div>
   )

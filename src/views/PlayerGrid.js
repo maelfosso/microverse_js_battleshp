@@ -1,21 +1,15 @@
 import Cell from './Cell';
 import Ship from './Ship';
-import { el } from './utils';
+import { el, mount, Fragment } from './utils';
 
 const PlayerGrid = ({ game, context }) => {
   let cells = [];
   let raw = [];
-  let disable = false;
 
   cells = game.player.gameboard.board.map((c, ix) => {
     let ship = c === undefined ? false : true;
 
     return <Cell index={ix} ship={ship} type={c}/>
-  });
-
-  game.on('togglePlayerAttacks', (result) => {
-    console.log('togglePlayerAttack ', result);
-    disable = result;
   });
 
   game.on('computerAttack', result => {
@@ -32,8 +26,26 @@ const PlayerGrid = ({ game, context }) => {
     }
   });
   
+  game.on('init', () => {
+    console.log('PlayerGrid - on init');
+
+    cells = game.player.gameboard.board.map((c, ix) => {
+      let ship = c === undefined ? false : true;
+  
+      return <Cell index={ix} ship={ship} type={c}/>
+    });
+
+    const { player: host } = context;
+    mount(
+      <Fragment>
+        { cells }
+      </Fragment>,
+      host
+    );
+  });
+
   return (
-    <div className={`board ${disable ? 'disable': ''}`}>{ cells }</div>
+    <div className="board disable" ref="player" context={context}>{ cells }</div>
   );
 }
 
