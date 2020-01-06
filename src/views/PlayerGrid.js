@@ -16,8 +16,7 @@ const PlayerGrid = ({ game, context }) => {
     let [index, r] = result;
     if (r === true) {
       cells[index].classList.add('hit');
-
-      // Computer play again
+      
       game.computerAttack();
     } else {
       cells[index].classList.add('missed');

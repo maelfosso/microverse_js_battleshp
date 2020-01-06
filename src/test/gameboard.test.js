@@ -7,12 +7,6 @@ describe('GameBoard', () => {
 
   beforeEach(() => {
     ships = {
-      // carrier: Object.assign({}, {
-      //   length: carrierFromFactory.length,
-      //   hits: carrierFromFactory.hits,
-      //   hit: carrierFromFactory.hit,
-      //   isSunk: carrierFromFactory.isSunk,
-      // }),
       frigate: Ship(3),
       submarine: Ship(2),
       attacker: Ship(1),

@@ -32,7 +32,6 @@ const GameInterface = ({ game, context }) => {
       <div className="actions">
         <button id="redistribute" onClick={e => game.init()}>Redistribute</button>
         <button id="reset" onClick={e => game.init()}>Reset</button>
-        {/* <button id="start">Start</button> */}
       </div>
     </div>
   )
