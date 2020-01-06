@@ -10,7 +10,7 @@ describe('GameBoard', () => {
   });
 
   test('board is empty at beginning', () => {
-    let result = gameboard.board.every((c) => c === undefined);
+    const result = gameboard.board.every((c) => c === undefined);
     expect(result).toBeTruthy();
   });
 
@@ -18,7 +18,7 @@ describe('GameBoard', () => {
     expect(gameboard.board[0]).toBeUndefined();
     expect(gameboard.board[1]).toBeUndefined();
 
-    let ship = Ship(2);
+    const ship = Ship(2);
     gameboard.placeShipAt(ship, 0, 0, 'horizontal');
 
     expect(gameboard.board[0]).not.toBeUndefined();
@@ -27,16 +27,16 @@ describe('GameBoard', () => {
 
   test('no attack could count at the initialization', () => {
     for(let i=0; i<100; i++) {
-      let y = Math.floor(i/10);
-      let x = i % 10;
+      const y = Math.floor(i/10);
+      const x = i % 10;
 
       expect(gameboard.receiveAttack(x, y)).toBeFalsy();
     }
   });
 
   test('received an attack at position', () => {
-    let s1 = Ship(2);
-    let s2 = Ship(4);
+    const s1 = Ship(2);
+    const s2 = Ship(4);
     gameboard.placeShipAt(s1, 0, 0, 'horizontal');
     gameboard.placeShipAt(s2, 4, 2, 'vertical');
 
@@ -56,8 +56,8 @@ describe('GameBoard', () => {
   });
 
   test('get the state of the game board', () => {
-    let s1 = Ship(2);
-    let s2 = Ship(4);
+    const s1 = Ship(2);
+    const s2 = Ship(4);
     gameboard.placeShipAt(s1, 0, 0, 'horizontal');
     gameboard.placeShipAt(s2, 4, 2, 'vertical');
 
