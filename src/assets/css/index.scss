@@ -5,6 +5,35 @@
   line-height: 1;
 }
 
+.legend {
+  display: flex;
+  width: 50%;
+  margin: auto;
+  justify-content: space-between;
+  align-items: center;
+
+  .blue {
+    background: blue;
+    width: 4em;
+    text-align: center;
+    color: white;
+  }
+
+  .yellow {
+    background: yellow;
+    width: 4em;
+    text-align: center;
+    color: black;
+  }
+
+  .red {
+    background: red;
+    width: 4em;
+    text-align: center;
+    color: white;
+  }
+}
+
 .game {
 
   #message {

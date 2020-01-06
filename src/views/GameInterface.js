@@ -26,7 +26,7 @@ const GameInterface = ({ game, context }) => {
           <ComputerGrid game={game} />
         </div>
       </div>
-      <div ref="message" id="message">
+      <div ref="message" id="message" context={context}>
 
       </div>
       <div className="actions">

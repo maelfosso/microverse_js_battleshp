@@ -11,6 +11,13 @@ const App = ({ game, context }) => {
         </nav>
       </header>
       <div>
+        <div className="legend">
+          <h4>LEGEND:</h4>
+        
+          <div className="blue">Ship</div>
+          <div className="yellow">Missed</div>
+          <div className="red">Hit</div>
+        </div>
         <GameInterface game={game} />
       </div>
       <footer>

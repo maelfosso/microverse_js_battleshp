@@ -4,9 +4,7 @@ import { random } from "../views/utils";
 const Gameboard = () => {
   const board = new Array(100).fill(undefined);
   const ships = [];
-  // missedShot = [],
-
-  // placeShipAt = (x, y, orientation, shipLength) => {
+  
   const placeShipAt = (ship, x, y, orientation) => {
     let shipLength = ship.length;
     if (orientation == 'horizontal') {
@@ -57,7 +55,7 @@ const Gameboard = () => {
         }
 
         for (let i=0; i<shipLength; i++) {
-          board[10 * (y + i) + x] = ships.length; // shipLength; 
+          board[10 * (y + i) + x] = ships.length; 
         }
 
         ships.push({
@@ -75,7 +73,7 @@ const Gameboard = () => {
 
   const receiveAttack = (x, y) => {
     let ix = board[10 * y + x];
-    console.log("receiveAttack", x, y, ix);
+    
     if (ix === undefined) {
       board[10 * y + x] = -1;
       
@@ -83,11 +81,10 @@ const Gameboard = () => {
     } else { 
       
       if (isNaN(ix) || ix == -1) {
-        return false; // Already attacked
+        return false;
       }
-
-      console.log(ships[ix]);
-      let {ship, start, end, orientation} = ships[ix]; // .onBaord();
+      
+      let {ship, start, end, orientation} = ships[ix];
       let hix = -1;
 
       if (orientation === "horizontal") {
@@ -95,10 +92,10 @@ const Gameboard = () => {
       } else  if (orientation === "vertical") {
         hix = y - start[1];
       }
-      console.log('hix', hix);
+      
       ships[ix].ship.hit(hix); 
       board[10 * y + x] = 'X';
-      // ship.hit(hix); 
+      
       return true;
     }
   }
@@ -143,8 +140,6 @@ const Gameboard = () => {
         step++;
       }
     });
-
-    console.log(ships);
   }
 
   return {
