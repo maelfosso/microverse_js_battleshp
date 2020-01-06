@@ -1,27 +1,37 @@
+import Ship from './ship';
+import { random } from "../views/utils";
+
 const Gameboard = () => {
   const board = new Array(100).fill(undefined);
   const ships = [];
-  // missedShot = [],
-
-  // placeShipAt = (x, y, orientation, shipLength) => {
+  
   const placeShipAt = (ship, x, y, orientation) => {
     let shipLength = ship.length;
     if (orientation == 'horizontal') {
       let values = [];
       for (let i=0; i<shipLength; i++) {
-        values.push(board[10 * x + y + i]);
+        values.push(board[10 * y + x + i]);
       }
+      
+      if (x - 1 >= 0 && board[10 * y + x - 1] !== undefined) return false;
+      if (x + shipLength - 1 < board.length && board[10 * y + x + shipLength - 1] !== undefined) return false;
 
-      if ((x + ship.length - 1 < 10) && (values.every(v => v === undefined)))  {
+
+      if ((x + shipLength - 1 < 10) && (values.every(v => v === undefined)))  {
         for (let i=0; i<shipLength; i++) {
-          board[10 * x + y + i] = ships.length;
+          if (board[10 * (y + 1) + x + i] !== undefined) return false;
+          if (board[10 * (y - 1) + x + i] !== undefined) return false;
         }
 
-        // ships.push(Ship(shipLength, [x,y], [x+shipLength, y], orientation));
+        for (let i=0; i<shipLength; i++) {
+
+          board[10 * y + x + i] = ships.length;
+        }
+
         ships.push({
           'ship': ship,
           "start": [x,y],
-          'end': [x+shipLength, y],
+          'end': [x + shipLength - 1, y],
           'orientation': orientation
         })
         return true;
@@ -31,19 +41,27 @@ const Gameboard = () => {
     } else if (orientation == 'vertical') {
       let values = [];
       for (let i=0; i<shipLength; i++) {
-        values.push(board[10 * (x + i) + y]);
+        values.push(board[10 * (y + i) + x]);
       }
+      
+      if (10 * (y - 1) + x >= 0 && board[10 * (y - 1) + x] !== undefined) return false;
+      if (10 * (y + shipLength - 1) + x < board.length && board[10 * (y + shipLength - 1) + x] !== undefined) return false;
 
+      
       if ((y + shipLength - 1 < 10) && (values.every(v => v === undefined))) {
         for (let i=0; i<shipLength; i++) {
-          board[10 * (x + i) + y] = ships.length;
+          if (board[10 * (y + i) + x - 1] !== undefined) return false;
+          if (board[10 * (y + i) + x + 1] !== undefined) return false;
         }
 
-        // ships.push(Ship(shipLength, [x,y], [x, y+shipLength], orientation));
+        for (let i=0; i<shipLength; i++) {
+          board[10 * (y + i) + x] = ships.length; 
+        }
+
         ships.push({
           'ship': ship,
           "start": [x,y],
-          'end': [x, y+shipLength],
+          'end': [x, y + shipLength - 1],
           'orientation': orientation
         });
         return true;
@@ -54,30 +72,30 @@ const Gameboard = () => {
   }
 
   const receiveAttack = (x, y) => {
-    let ix = board[10 * x + y];
+    let ix = board[10 * y + x];
     
     if (ix === undefined) {
-      board[10 * x + y] = -1;
+      board[10 * y + x] = -1;
       
       return false;
     } else { 
       
-      if (isNaN(ix)) {
-        return false; // Already attacked
+      if (isNaN(ix) || ix == -1) {
+        return false;
       }
-
-      let {ship, start, end, orientation} = ships[ix]; // .onBaord();
+      
+      let {ship, start, end, orientation} = ships[ix];
       let hix = -1;
 
-      if (o == 'horizontal') {
+      if (orientation === "horizontal") {
         hix = x - start[0];
-      } else  if (o == 'horizontal') {
+      } else  if (orientation === "vertical") {
         hix = y - start[1];
       }
       
       ships[ix].ship.hit(hix); 
-      board[10 * x + y] = 'X';
-      // ship.hit(hix); 
+      board[10 * y + x] = 'X';
+      
       return true;
     }
   }
@@ -90,6 +108,40 @@ const Gameboard = () => {
     }
   }
 
+  const init = () => {
+    for (let i=0; i<board.length; i++) {
+      board[i] = undefined;
+    }
+    while (ships.length > 0) ships.pop();
+
+    let shipTypeNumber = {
+      '4': 1,
+      '3': 2,
+      '2': 3,
+      '1': 4
+    }
+
+    Object.keys(shipTypeNumber).forEach(type => {
+      
+      let ship = Ship(+type);
+
+      let i=0;
+      let step = 0;
+      while (i < shipTypeNumber[type] && step < 50) {
+        
+        let x = random(10);
+        let y = random(10);
+        let orientation = random(10) % 2 == 0 ? "horizontal" : "vertical";
+
+        let isPlaced = placeShipAt(ship, x, y, orientation);
+        if (isPlaced) {
+          i++;
+        }
+        step++;
+      }
+    });
+  }
+
   return {
     board,
     ships,
@@ -97,6 +149,8 @@ const Gameboard = () => {
     placeShipAt,
     receiveAttack,
     state,
+
+    init
   }
 };
 

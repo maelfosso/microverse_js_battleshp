@@ -1,0 +1,112 @@
+.logo {
+  display: inline-block;
+  font-weight: 700;
+  font-size: 1.5em;
+  line-height: 1;
+}
+
+.legend {
+  display: flex;
+  width: 50%;
+  margin: auto;
+  justify-content: space-between;
+  align-items: center;
+
+  .blue {
+    background: blue;
+    width: 4em;
+    text-align: center;
+    color: white;
+  }
+
+  .yellow {
+    background: yellow;
+    width: 4em;
+    text-align: center;
+    color: black;
+  }
+
+  .red {
+    background: red;
+    width: 4em;
+    text-align: center;
+    color: white;
+  }
+}
+
+.game {
+
+  #message {
+    text-transform: capitalize;
+    font-size: 18px;
+  }
+
+  .grids {
+    display: flex;
+    flex-wrap: wrap;
+    margin: auto;
+    width: 50em;
+
+    .board {
+      width: 22em;
+      display: flex;
+      flex-wrap: wrap;
+      
+      &.disable {
+        pointer-events: none;
+        cursor: none;
+      }
+
+      .ship {
+        border: 2px solid #00f;
+        background: rgba(0,0,255,.05);
+        display: flex;
+
+        .cell {
+          height: calc(2em - 4px);
+          width: calc(2em - 3px);
+          border: none;
+        }
+      }
+
+      .cell {
+        border: 1px solid #b4b4ff;
+        padding: 0;
+        height: 2em;
+        width: 2em;
+        cursor: pointer;
+
+        &.ship {
+          background-color: #00f;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+        }
+
+        &.hit {
+          background-color: red;
+        }
+
+        &.missed {
+          background-color: yellow;
+        }
+      }
+    }
+  }
+
+  .actions {
+    display: flex;
+    justify-content: space-evenly;
+    width: 30%;
+    margin: auto;
+    margin-top: 2em;
+  }
+
+}
+
+footer {
+  display: flex;
+  justify-content: space-between;
+  margin: 5em 5em 0 5em;
+}
