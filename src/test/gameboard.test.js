@@ -10,7 +10,7 @@ describe('GameBoard', () => {
   });
 
   test('board is empty at beginning', () => {
-    const result = gameboard.board.every((c) => c === undefined);
+    const result = gameboard.board.every(c => c === undefined);
     expect(result).toBeTruthy();
   });
 
@@ -51,7 +51,7 @@ describe('GameBoard', () => {
   test('init the gameboard', () => {
     gameboard.init();
 
-    const result = gameboard.board.some((c) => c !== undefined);
+    const result = gameboard.board.some(c => c !== undefined);
     expect(result).toBeTruthy();
   });
 
