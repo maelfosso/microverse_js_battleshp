@@ -13,9 +13,7 @@ const PlayerGrid = ({ game, context }) => {
   });
 
   game.on('computerAttack', result => {
-    console.log("PlayerGrid - ComputerAttack ", result);
     let [index, r] = result;
-    console.log(cells[index]);
     if (r === true) {
       cells[index].classList.add('hit');
 
@@ -27,8 +25,6 @@ const PlayerGrid = ({ game, context }) => {
   });
   
   game.on('init', () => {
-    console.log('PlayerGrid - on init');
-
     cells = game.player.gameboard.board.map((c, ix) => {
       let ship = c === undefined ? false : true;
   
@@ -42,6 +38,10 @@ const PlayerGrid = ({ game, context }) => {
       </Fragment>,
       host
     );
+  });
+
+  game.on('state', ({state, player}) => {
+    if (state == true) {}
   });
 
   return (

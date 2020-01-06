@@ -31,11 +31,17 @@ const ComputerGrid = ({ game, context }) => {
   const handleClick = coord => e => {
     const cell = e.target;
     let res = game.playerAttack(coord);
+
     if (res === false) {
       cell.classList.add('missed');
       game.computerAttack();
     } else {
       cell.classList.add('hit');
+
+      let {state, player} = game.state('computer');
+      if (state === true) {
+        disable = true;
+      }
     }
   };
 

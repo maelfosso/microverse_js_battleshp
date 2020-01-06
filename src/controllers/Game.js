@@ -14,15 +14,11 @@ export default class Game extends Observable {
 
     this.computer.gameboard.init();
     this.player.gameboard.init();
-    console.log(this.player.gameboard.board);
-    console.log(this.computer.gameboard.board);
   }
 
   init() {
     this.computer.gameboard.init();
     this.player.gameboard.init();
-
-    console.log("INit called");
     return true;
   }
 
@@ -33,11 +29,9 @@ export default class Game extends Observable {
   }
 
   playerAttack(index) {
-    console.log("PlayerAttack - ", index);
     let y = Math.floor(index/10);
     let x = index % 10;
     let r = this.computer.gameboard.receiveAttack(x, y);
-    console.log(x, y, r);
 
     return r;
   }
@@ -51,11 +45,9 @@ export default class Game extends Observable {
     while (this.attacksByComputer.indexOf(index) !== -1) index = random(100);
 
     // 3. Call this.player.gameboard.receiveAttack
-    console.log("ComputerAttack - ", index);
     let y = Math.floor(index/10);
     let x = index % 10;
     let r = this.player.gameboard.receiveAttack(x, y);
-    console.log(x, y, r);
     if (r == true) {
       this.attacksByComputer.push(index);
     }
@@ -63,6 +55,20 @@ export default class Game extends Observable {
     // 4. According the result (T/F) we color the cell attacked
 
     return [index, r];
+  }
+
+  state(player) {
+    let state;
+
+    if (player == 'computer') {
+      state = this.computer.gameboard.state();
+    } else if (player == 'player') {
+      state = this.player.gameboard.state();
+    } else {
+      state = null;
+    }
+
+    return { state, player }
   }
 
 }

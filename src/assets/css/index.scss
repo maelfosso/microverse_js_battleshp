@@ -7,6 +7,11 @@
 
 .game {
 
+  #message {
+    text-transform: capitalize;
+    font-size: 18px;
+  }
+
   .grids {
     display: flex;
     flex-wrap: wrap;
@@ -26,17 +31,12 @@
       .ship {
         border: 2px solid #00f;
         background: rgba(0,0,255,.05);
-        // margin: -2px;
         display: flex;
 
         .cell {
           height: calc(2em - 4px);
           width: calc(2em - 3px);
           border: none;
-
-          // &.ship {
-          //   border-color: rgba(0,0,255,.1);
-          // }
         }
       }
 

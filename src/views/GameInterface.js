@@ -1,11 +1,17 @@
 import PlayerGrid from './PlayerGrid';
 import ComputerGrid from './ComputerGrid';
-import { el } from './utils';
+import { el, mount } from './utils';
 
 const GameInterface = ({ game, context }) => {
 
-  game.on('init', () => {
-    console.log('GameInterface - on init');
+  game.on('state', ({state, player}) => {
+    if (state == true) {
+      let node = document.getElementById('message').innerHTML = `${player} WON!!`
+
+      let {message: host} = context;
+      mount(node, host);
+    }
+    
   });
 
   return (
@@ -19,6 +25,9 @@ const GameInterface = ({ game, context }) => {
           <h3>Computer</h3>
           <ComputerGrid game={game} />
         </div>
+      </div>
+      <div ref="message" id="message">
+
       </div>
       <div className="actions">
         <button id="redistribute" onClick={e => game.init()}>Redistribute</button>
