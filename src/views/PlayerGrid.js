@@ -39,9 +39,7 @@ const PlayerGrid = ({ game, context }) => {
     );
   });
 
-
-
-  game.on('state', ({state, player}) => {
+  game.on('state', ({ state }) => {
     if (state === true) {
       const { player: host } = context;
       host.classList.add('winner');

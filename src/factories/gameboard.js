@@ -103,7 +103,7 @@ const Gameboard = () => {
   }
 
   const state = () => {
-    const result = ships.every((s) => s.ship.isSunk());
+    const result = ships.every(s => s.ship.isSunk());
 
     if (result) {
       return true;

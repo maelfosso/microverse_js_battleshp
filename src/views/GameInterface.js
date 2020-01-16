@@ -7,7 +7,8 @@ const GameInterface = ({ game, context }) => {
 
   game.on('state', ({state, player}) => {
     if (state == true) {
-      const node = document.getElementById('message').innerHTML = `${player === 'computer' ? 'Player' : 'Computer'} WON!!`
+      const node = document.getElementById('message');
+      node.innerHTML = `${player === 'computer' ? 'Player' : 'Computer'} WON!!`;
       winner = true;
       const { message: host } = context;
       mount(node, host);
@@ -15,7 +16,8 @@ const GameInterface = ({ game, context }) => {
   });
 
   game.on('init', () => {
-    const node = document.getElementById('message').innerHTML = '';
+    const node = document.getElementById('message');
+    node.innerHTML = '';
     
     const { message: host } = context;
     mount(node, host);

@@ -25,7 +25,7 @@ const ComputerGrid = ({ game, context }) => {
     );
   });
 
-  game.on('state', ({ state, player }) => {
+  game.on('state', ({ state }) => {
     if (state === true) {
       const { computer: host } = context;
       host.classList.add('winner');
