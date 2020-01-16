@@ -25,7 +25,17 @@ const ComputerGrid = ({ game, context }) => {
     );
   });
 
+  game.on('state', ({state, player}) => {
+    if (state == true) {
+      const { computer: host } = context;
+      host.classList.add('winner');
+    }
+  });
+
   const handleClick = coord => e => {
+    e.preventDefault();
+    e.stopPropagation();
+
     const cell = e.target;
     let res = game.playerAttack(coord);
 

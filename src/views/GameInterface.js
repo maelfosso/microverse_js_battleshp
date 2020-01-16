@@ -3,11 +3,12 @@ import ComputerGrid from './ComputerGrid';
 import { el, mount } from './utils';
 
 const GameInterface = ({ game, context }) => {
+  let winner = false;
 
   game.on('state', ({state, player}) => {
     if (state == true) {
       let node = document.getElementById('message').innerHTML = `${player == 'computer' ? 'Player' : 'Computer'} WON!!`
-
+      winner = true;
       let {message: host} = context;
       mount(node, host);
     }
@@ -21,7 +22,7 @@ const GameInterface = ({ game, context }) => {
   });
 
   return (
-    <div className="game">
+    <div className={`game ${winner ? 'winner' : ''}`}>
       <div className="grids">
         <div className="player">
           <h3>Player</h3>

@@ -53,6 +53,10 @@
       display: flex;
       flex-wrap: wrap;
       
+      &.winner {
+        pointer-events: none;
+      }
+      
       &.disable {
         pointer-events: none;
         cursor: none;
@@ -87,10 +91,12 @@
 
         &.hit {
           background-color: red;
+          pointer-events: none;
         }
 
         &.missed {
           background-color: yellow;
+          pointer-events: none;
         }
       }
     }

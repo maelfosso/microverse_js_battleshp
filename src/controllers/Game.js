@@ -33,6 +33,7 @@ export default class Game extends Observable {
     let x = index % 10;
     let r = this.computer.gameboard.receiveAttack(x, y);
 
+    
     return r;
   }
 
