@@ -39,6 +39,7 @@
   #message {
     text-transform: capitalize;
     font-size: 18px;
+    text-align: center;
   }
 
   .grids {
@@ -51,6 +52,10 @@
       width: 22em;
       display: flex;
       flex-wrap: wrap;
+      
+      &.winner {
+        pointer-events: none;
+      }
       
       &.disable {
         pointer-events: none;
@@ -86,10 +91,12 @@
 
         &.hit {
           background-color: red;
+          pointer-events: none;
         }
 
         &.missed {
           background-color: yellow;
+          pointer-events: none;
         }
       }
     }

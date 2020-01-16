@@ -3,19 +3,28 @@ import ComputerGrid from './ComputerGrid';
 import { el, mount } from './utils';
 
 const GameInterface = ({ game, context }) => {
+  let winner = false;
 
   game.on('state', ({state, player}) => {
     if (state == true) {
-      let node = document.getElementById('message').innerHTML = `${player} WON!!`
-
-      let {message: host} = context;
+      const node = document.getElementById('message');
+      node.innerHTML = `${player === 'computer' ? 'Player' : 'Computer'} WON!!`;
+      winner = true;
+      const { message: host } = context;
       mount(node, host);
     }
+  });
+
+  game.on('init', () => {
+    const node = document.getElementById('message');
+    node.innerHTML = '';
     
+    const { message: host } = context;
+    mount(node, host);
   });
 
   return (
-    <div className="game">
+    <div className={ `game ${ winner ? 'winner' : '' } ` }>
       <div className="grids">
         <div className="player">
           <h3>Player</h3>
@@ -32,7 +41,6 @@ const GameInterface = ({ game, context }) => {
       <div className="actions">
         <button id="redistribute" onClick={e => game.init()}>Redistribute</button>
         <button id="reset" onClick={e => game.init()}>Reset</button>
-        {/* <button id="start">Start</button> */}
       </div>
     </div>
   )

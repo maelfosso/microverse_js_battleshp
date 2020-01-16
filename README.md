@@ -1,10 +1,16 @@
-## Library
-This is a library application in javascript with add book, remove book and change read status functionality
+## Battleship
+This project brings together the concepts of Callbacks, Object Oriented Programming, Factory Functions, Module Pattern, Single Responsibility, Tightly Coupled Objects and Test Driven Development.  
+To handle the complexity of synchronizing the views with data changes, I created an Observable object on which can be attached handlers. The `Observable class` is located in `./src/views/utils.js`.  
+In the same line of simplifying the view, a support to JSX syntax was also added.  
+This project is part of [microverse](https://www.microverse.org/) curriculum.
 
-## Functionnalities
-- Add a book
-- Toogle the read status of a book
-- Delete a book
+## Set up
+
+To run the project:
+
+- Clone the repository: _https://github.com/maelfosso/Battleship_
+- Run `npm install`. It will install all the dependencies required by the project
+- Run `npm start` to start the development server. It will automatically open the page in your default browser.
 
 ## Contributors:
 [Mael FOSSO](https://github.com/maelfosso)

@@ -7,13 +7,10 @@ const ComputerGrid = ({ game, context }) => {
 
 
   game.on('togglePlayerAttacks', (result) => {
-    console.log('togglePlayerAttack ', result);
     disable = result;
   });
 
   game.on('init', () => {
-    console.log('ComputerGrid - on init');
-
     const cells = new Array(100)
       .fill(undefined)
       .map((a, ix) => <Cell index={ix} click={handleClick(ix)}/>);
@@ -28,7 +25,17 @@ const ComputerGrid = ({ game, context }) => {
     );
   });
 
+  game.on('state', ({ state }) => {
+    if (state === true) {
+      const { computer: host } = context;
+      host.classList.add('winner');
+    }
+  });
+
   const handleClick = coord => e => {
+    e.preventDefault();
+    e.stopPropagation();
+
     const cell = e.target;
     let res = game.playerAttack(coord);
 

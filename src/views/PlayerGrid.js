@@ -16,8 +16,7 @@ const PlayerGrid = ({ game, context }) => {
     let [index, r] = result;
     if (r === true) {
       cells[index].classList.add('hit');
-
-      // Computer play again
+      
       game.computerAttack();
     } else {
       cells[index].classList.add('missed');
@@ -40,10 +39,13 @@ const PlayerGrid = ({ game, context }) => {
     );
   });
 
-  game.on('state', ({state, player}) => {
-    if (state == true) {}
+  game.on('state', ({ state }) => {
+    if (state === true) {
+      const { player: host } = context;
+      host.classList.add('winner');
+    }
   });
-
+  
   return (
     <div className="board disable" ref="player" context={context}>{ cells }</div>
   );

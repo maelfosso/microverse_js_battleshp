@@ -20,9 +20,6 @@ describe('Ship', () => {
     });
 
     test('hit(5) should raise an error', () => {
-      // expect(() => {
-      //   ship.hit(5);
-      // }).toThrow();
       expect(ship.length).toBe(3);
       expect(() => ship.hit(5)).toThrow();
     });
