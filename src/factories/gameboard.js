@@ -73,7 +73,6 @@ const Gameboard = () => {
 
   const receiveAttack = (x, y) => {
     let ix = board[10 * y + x];
-    console.log('Received Attack : ', ix, x, y, board);
     
     if (ix === undefined) {
       board[10 * y + x] = -1;
@@ -87,7 +86,7 @@ const Gameboard = () => {
       
       let {ship, start, end, orientation} = ships[ix];
       let hix = -1;
-      
+
       if (orientation === "horizontal") {
         hix = x - start[0];
       } else  if (orientation === "vertical") {
@@ -104,9 +103,7 @@ const Gameboard = () => {
   }
 
   const state = () => {
-    const result = ships.every((s) => {
-      return s.ship.isSunk();
-    });
+    const result = ships.every((s) => s.ship.isSunk());
 
     if (result) {
       return true;
@@ -134,8 +131,7 @@ const Gameboard = () => {
       let step = 0;
       while (i < shipTypeNumber[type] && step < 50) {
         const ship = Ship(+type);
-
-      
+        
         let x = random(10);
         let y = random(10);
         let orientation = random(10) % 2 == 0 ? "horizontal" : "vertical";

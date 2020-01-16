@@ -42,13 +42,12 @@ const PlayerGrid = ({ game, context }) => {
 
 
   game.on('state', ({state, player}) => {
-    if (state == true) {
+    if (state === true) {
       const { player: host } = context;
       host.classList.add('winner');
     }
   });
   
-
   return (
     <div className="board disable" ref="player" context={context}>{ cells }</div>
   );

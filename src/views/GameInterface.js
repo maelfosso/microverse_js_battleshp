@@ -7,22 +7,22 @@ const GameInterface = ({ game, context }) => {
 
   game.on('state', ({state, player}) => {
     if (state == true) {
-      let node = document.getElementById('message').innerHTML = `${player == 'computer' ? 'Player' : 'Computer'} WON!!`
+      const node = document.getElementById('message').innerHTML = `${player === 'computer' ? 'Player' : 'Computer'} WON!!`
       winner = true;
-      let {message: host} = context;
+      const { message: host } = context;
       mount(node, host);
     }
   });
 
   game.on('init', () => {
-    let node = document.getElementById('message').innerHTML = "";
+    const node = document.getElementById('message').innerHTML = '';
     
-    let {message: host} = context;
+    const { message: host } = context;
     mount(node, host);
   });
 
   return (
-    <div className={`game ${winner ? 'winner' : ''}`}>
+    <div className={ `game ${ winner ? 'winner' : '' } ` }>
       <div className="grids">
         <div className="player">
           <h3>Player</h3>
