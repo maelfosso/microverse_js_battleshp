@@ -33,8 +33,8 @@ To get a local copy up and running follow these simple example steps.
 - Clone the repository `git clone https://github.com/maelfosso/microverse_js_battleshp`
 - Change your current directory `cd microverse_js_battleshp`
 - Install all the dependencies `yarn install`
-- Run either `yarn build` or `npm build`
-- Launch the app `yarn launch`
+- Run `yarn start-dev`
+- Your browser will be opened at `http://localhost:8080/`
 
 
 ## Authors
